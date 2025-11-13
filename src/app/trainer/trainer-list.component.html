@@ -1,0 +1,23 @@
+<div class="add-section">
+  <input
+    type="text"
+    placeholder="Enter trainer name"
+    [(ngModel)]="newNameValue"
+    (ngModelChange)="newName.set($event)"
+  />
+  <button (click)="addTrainer()">Add Item</button>
+</div>
+
+<ul>
+  @for (trainer of trainers(); track trainer.id) {
+    <li class="list-item">
+      <app-trainer-detail [trainer]="trainer"></app-trainer-detail>
+    </li>
+  } @empty {
+    <p>No trainers to display.</p>
+  }
+</ul>
+
+@if (trainers().length > 0) {
+  <p>Data is available!</p>
+}
