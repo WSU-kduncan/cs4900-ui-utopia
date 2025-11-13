@@ -1,0 +1,16 @@
+<p>Session</p>
+
+@if (session.length > 0){
+    <ul>
+        @for (session of sessions; track.session.id) {
+            <li>
+                <strong>{{ session.name }}</strong>
+                <p>Date: {{ session.date }}</p>
+                <p>Duration: {{ session.duration }}</p>
+            </li>
+        }
+    </ul>
+} else {
+    <p>Session is empty</p>
+}
+
