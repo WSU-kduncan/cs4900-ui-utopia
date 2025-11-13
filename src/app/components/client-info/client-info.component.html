@@ -1,11 +1,17 @@
 <p>Clients</p>
 
+<input
+  type="text"
+  [(ngModel)]="newClientName"
+  placeholder="New Client Name"
+  (keyup.enter)="addClient()"
+/>
+<button click="addClient()">Add Client</button>
 @if (clients.length > 0) {
 <ul>
   @for (client of clients; track client.id) {
   <li>
-    <strong>{{ client.name }}</strong>
-    <p>ID: {{ client.id }}</p>
+    <app-client-detail [client]="client" />
   </li>
   }
 </ul>
