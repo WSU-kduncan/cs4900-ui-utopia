@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TrainerListComponent } from './Trainer/trainer-list.component';
+import { TrainerListComponent } from './trainer/trainer-list.component';
 
 @Component({
   selector: 'app-root',
