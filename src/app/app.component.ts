@@ -6,7 +6,7 @@ import { Client, ClientInfoComponent } from './components/client-info/client-inf
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ClientInfoComponent],
+  imports: [ClientInfoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
