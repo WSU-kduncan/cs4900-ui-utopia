@@ -1,17 +1,29 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Session, SessionService } from '../services/session.service';
+
+import { SessionDetailComponent } from '../session-detail/session-detail.component'; 
 
 @Component({
   selector: 'app-session',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, SessionDetailComponent],
   templateUrl: './session.component.html',
-  styleUrl: './session.component.css'
+  styleUrls: ['./session.component.css']
 })
-
 export class SessionComponent {
-  sessions = [
-    { id: 1, name: 'Leg Day', date: '2025-11-10', duration: 60 },
-    { id: 2, name: 'Push Day', date: '2025-11-08', duration: 45 },
-    { id: 3, name: 'Pull Day', date: '2025-11-05', duration: 50 }
-  ];
+  newSessionName: string = '';
+
+  constructor(public sessionService: SessionService) {}
+
+  addSession() {
+    if (!this.newSessionName.trim()) return;
+
+    this.sessionService.addSession(this.newSessionName);
+    this.newSessionName = '';
+  }
+
+  get sessions(): Session[] {
+    return this.sessionService.sessions;
+  }
 }

@@ -1,16 +1,25 @@
-<p>Session</p>
+<p>Sessions</p>
 
-@if (session.length > 0){
-    <ul>
-        @for (session of sessions; track.session.id) {
-            <li>
-                <strong>{{ session.name }}</strong>
-                <p>Date: {{ session.date }}</p>
-                <p>Duration: {{ session.duration }}</p>
-            </li>
-        }
-    </ul>
-} else {
-    <p>Session is empty</p>
+<!-- Input to add a new session -->
+<div class="add-section">
+  <input
+    type="text"
+    placeholder="New Session Name"
+    [(ngModel)]="newSessionName"
+    (keyup.enter)="addSession()"
+  />
+  <button (click)="addSession()">Add Session</button>
+</div>
+
+<!-- Display sessions -->
+@if (sessions.length > 0) {
+  <ul>
+    @for (session of sessions; track session.id) {
+      <li>
+        <app-session-detail [session]="session"></app-session-detail>
+      </li>
+    }
+  </ul>
+} @else {
+  <p>No sessions available!</p>
 }
-
