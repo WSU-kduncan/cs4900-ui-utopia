@@ -1,5 +1,3 @@
-<p>Sessions</p>
-
 <!-- Input to add a new session -->
 <div class="add-section">
   <input
@@ -11,15 +9,19 @@
   <button (click)="addSession()">Add Session</button>
 </div>
 
+<strong><p>Sessions</p></strong>
+
 <!-- Display sessions -->
-<div *ngIf="sessions()?.length > 0; else noSessions">
+@if (sessions(); as sessionsList) {
+<div>
   <ul>
-    <li *ngFor="let session of sessions(); trackBy: trackById">
+    <li *ngFor="let session of sessionsList; trackBy: trackById">
       <app-session-detail [session]="session"></app-session-detail>
     </li>
   </ul>
 </div>
-
+} @else {
 <ng-template #noSessions>
   <p>No sessions available!</p>
 </ng-template>
+}
