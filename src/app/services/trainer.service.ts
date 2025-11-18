@@ -1,23 +1,38 @@
 import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface Trainer {
   id: number;
   name: string;
+  email: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class TrainerService {
-  private _trainers = signal<Trainer[]>([
-    { id: 1, name: 'John Addams' },
-    { id: 2, name: 'Jack Daniel' },
-    { id: 3, name: 'Jim Beam' }
-  ]);
+  private apiUrl = 'https://jsonplaceholder.typicode.com/users';
 
-  trainers = this._trainers.asReadonly();
+  constructor(private http: HttpClient) {}
 
-  addTrainer(name: string) {
-    if (!name?.trim()) return;
-    const newId = Math.max(...this._trainers().map(t => t.id), 0) + 1;
-    this._trainers.update(list => [...list, { id: newId, name: name.trim() }]);
+  getTrainers(): Observable<Trainer[]> {
+    return this.http.get<Trainer[]>(this.apiUrl);
+  }
+
+  private _localTrainers = signal<Trainer[]>([]);
+  localTrainers = this._localTrainers.asReadonly();
+
+  addTrainer(name: string, email: string = '') {
+    if (!name.trim()) return;
+
+    const currentLocalIds = this._localTrainers().map(t => t.id);
+    const maxLocalId = currentLocalIds.length > 0 ? Math.max(...currentLocalIds) : 0;
+    const newId = maxLocalId + 1;
+
+    const newTrainer: Trainer = {
+      id: newId,
+      name: name.trim(),
+      email: email || `${name.toLowerCase().replace(' ', '.')}@example.com`
+    };
+    this._localTrainers.update(list => [...list, newTrainer]);
   }
 }

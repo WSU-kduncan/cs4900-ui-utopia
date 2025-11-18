@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { TrainerService } from '../services/trainer.service';
+import { Component, signal, inject } from '@angular/core';
+import { TrainerService, Trainer } from '../services/trainer.service';
 import { TrainerDetailComponent } from '../trainer-detail/trainer-detail.component';
 import { FormsModule } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-trainer-list',
@@ -11,11 +12,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './trainer-list.component.scss',
 })
 export class TrainerListComponent {
-  constructor(private trainerService: TrainerService) {}
+  private trainerService = inject(TrainerService);
 
-  get trainers() {
-    return this.trainerService.trainers;
-  }
+  trainers = toSignal(this.trainerService.getTrainers(), { initialValue: [] });
 
   newName = signal('');
   newNameValue = '';
