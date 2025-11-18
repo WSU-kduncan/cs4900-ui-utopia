@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Session, SessionService } from '../services/session.service';
-
+import { toSignal } from '@angular/core/rxjs-interop';
 import { SessionDetailComponent } from '../session-detail/session-detail.component'; 
 
 @Component({
@@ -14,6 +14,8 @@ import { SessionDetailComponent } from '../session-detail/session-detail.compone
 export class SessionComponent {
   newSessionName: string = '';
 
+  public sessions = toSignal<Session[]>(this.sessionService.getSessions(), { initialValue: [] });
+
   constructor(public sessionService: SessionService) {}
 
   addSession() {
@@ -23,7 +25,8 @@ export class SessionComponent {
     this.newSessionName = '';
   }
 
-  get sessions(): Session[] {
-    return this.sessionService.sessions;
+  trackById(index: number, session: Session) {
+    return session.id;
   }
+  
 }
