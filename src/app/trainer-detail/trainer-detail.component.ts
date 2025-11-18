@@ -5,11 +5,14 @@ import { Trainer } from "../services/trainer.service";
     selector: 'app-trainer-detail',
     standalone: true,
     template: `
-    <h3>{{ trainer().name }}</h3>
-    <small>ID: {{ trainer().id }}</small>
+        <div>
+            <h3>{{ trainer().name }}</h3>
+            <p><strong>Email:</strong> {{ trainer().email }}</p>
+            <small>ID: {{ trainer().id }}</small>
+        </div>
     `,
     styles: [`
-        :host { display: block; }
+        div { padding: 12px; border-left: 4px solid #1976d2; margin: 8px 0; background: #f5f5f5; }    
     `]
 })
 export class TrainerDetailComponent {
