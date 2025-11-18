@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { TrainerListComponent } from './trainer/trainer-list.component';
 
 import { ClientInfoComponent } from './components/client-info/client-info.component';
+import {SessionComponent} from './session/session.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TrainerListComponent, ClientInfoComponent],
+  imports: [TrainerListComponent, ClientInfoComponent, SessionComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

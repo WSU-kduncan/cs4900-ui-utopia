@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Session, SessionService } from '../services/session.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { SessionDetailComponent } from '../session-detail/session-detail.component'; 
+import { SessionDetailComponent } from '../session-detail/session-detail.component';
+import {NgFor, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-session',
   standalone: true,
-  imports: [FormsModule, SessionDetailComponent],
+  imports: [FormsModule, SessionDetailComponent, NgFor],
   templateUrl: './session.component.html',
-  styleUrls: ['./session.component.css']
+  styleUrls: ['./session.component.scss']
 })
 export class SessionComponent {
   newSessionName: string = '';
 
-  public sessions = toSignal<Session[]>(this.sessionService.getSessions(), { initialValue: [] });
+  private sessionService = inject(SessionService);
+  public sessions = toSignal(this.sessionService.getSessions(), { initialValue: [] });
 
-  constructor(public sessionService: SessionService) {}
+  constructor() {}
 
   addSession() {
     if (!this.newSessionName.trim()) return;
@@ -28,5 +30,5 @@ export class SessionComponent {
   trackById(index: number, session: Session) {
     return session.id;
   }
-  
+
 }
