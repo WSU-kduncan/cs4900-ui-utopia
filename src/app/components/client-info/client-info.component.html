@@ -8,18 +8,18 @@
 />
 <button click="addClient()">Add Client</button>
 
-@if (clients.length > 0) {
-<ul>
-  @for (client of clients; track client.id) {
-  <li>
-    <app-client-detail [client]="client" />
-  </li>
+@if (clients(); as clientList) {
+  @if (clientList.length > 0) {
+  <ul>
+    @for (client of clients(); track client.id) {
+    <li>
+      <app-client-detail [client]="client" />
+    </li>
+    }
+  </ul>
+  } @else {
+  <p>No valid clients!</p>
   }
-</ul>
 } @else {
-<p>No valid clients!</p>
-}
-
-@empty {
   <p>Loading clients...</p>
 }
