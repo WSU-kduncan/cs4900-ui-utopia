@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface Client {
@@ -13,7 +13,9 @@ export interface Client {
 export class ClientService {
     private readonly apiUrl = 'https://jsonplaceholder.typicode.com/users';
 
-    constructor(private http: HttpClient) {}
+    http = inject(HttpClient);
+
+    constructor() {}
 
     getClients(): Observable<Client[]> {
       return this.http.get<Client[]>(this.apiUrl);
