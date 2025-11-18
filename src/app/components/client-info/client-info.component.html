@@ -7,6 +7,7 @@
   (keyup.enter)="addClient()"
 />
 <button click="addClient()">Add Client</button>
+
 @if (clients.length > 0) {
 <ul>
   @for (client of clients; track client.id) {
@@ -17,4 +18,8 @@
 </ul>
 } @else {
 <p>No valid clients!</p>
+}
+
+@empty {
+  <p>Loading clients...</p>
 }
