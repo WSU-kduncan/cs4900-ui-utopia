@@ -12,14 +12,14 @@
 </div>
 
 <!-- Display sessions -->
-@if (sessions.length > 0) {
+<div *ngIf="sessions()?.length > 0; else noSessions">
   <ul>
-    @for (session of sessions; track session.id) {
-      <li>
-        <app-session-detail [session]="session"></app-session-detail>
-      </li>
-    }
+    <li *ngFor="let session of sessions(); trackBy: trackById">
+      <app-session-detail [session]="session"></app-session-detail>
+    </li>
   </ul>
-} @else {
+</div>
+
+<ng-template #noSessions>
   <p>No sessions available!</p>
-}
+</ng-template>

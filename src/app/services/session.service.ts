@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 export interface Session {
   id: number; 
@@ -18,7 +20,7 @@ export class SessionService {
     { id: 3, name: 'Pull Day', date: '2025-11-05', duration: 50 }
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   addSession(name: string, date: string = new Date().toISOString().slice(0, 10), duration: number = 60) {
     let newId = 1;
@@ -27,4 +29,9 @@ export class SessionService {
     }
     this.sessions.push({ id: newId, name, date, duration });
   }
+
+  getSessions(): Observable<Session[]> {
+    return this.http.get<Session[]>('https://jsonplaceholder.typicode.com/users');
+  }
+  
 }
