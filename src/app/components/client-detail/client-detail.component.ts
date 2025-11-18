@@ -3,6 +3,7 @@ import { Component, input } from '@angular/core';
 export interface Client {
     id: number;
     name: string;
+    email: string;
 }
 
 @Component({
