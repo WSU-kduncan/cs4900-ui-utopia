@@ -4,7 +4,7 @@ import {SessionComponent} from './session/session.component';
 
 @Component({
   selector: 'app-root',
-  imports: [SessionComponent],
+  imports: [RouterOutlet, SessionComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
