@@ -13,9 +13,9 @@
 
 <!-- Display sessions -->
 @if (sessions.length > 0) {
-  <ul>
+  <ul role="list" aria-label="Fitness sessions">
     @for (session of sessions; track session.id) {
-      <li>
+      <li role="listitem">
         <app-session-detail [session]="session"></app-session-detail>
       </li>
     }
