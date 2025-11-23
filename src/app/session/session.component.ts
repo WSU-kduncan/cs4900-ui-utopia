@@ -12,7 +12,7 @@ import {NgFor, NgIf} from '@angular/common';
   templateUrl: './session.component.html',
   styleUrls: ['./session.component.scss']
 })
-export class SessionComponent {
+export class SessionComponent  {
   newSessionName: string = '';
 
   private sessionService = inject(SessionService);
