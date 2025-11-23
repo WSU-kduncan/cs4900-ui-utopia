@@ -31,6 +31,7 @@ export class SessionService {
   }
 
   getSessions(): Observable<Session[]> {
+    //return this.http.get<Session[]>('https://localhost:8080/OpenTrainer/session')
     return this.http.get<Session[]>('https://jsonplaceholder.typicode.com/users');
   }
   
