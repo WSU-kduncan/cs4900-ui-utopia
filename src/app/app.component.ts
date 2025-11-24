@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {SessionComponent} from './session/session.component';
+import { SessionFormComponent } from './session-form/session-form.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SessionComponent],
+  imports: [RouterOutlet, SessionComponent, SessionFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

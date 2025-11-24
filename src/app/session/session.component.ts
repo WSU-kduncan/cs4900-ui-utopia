@@ -46,6 +46,13 @@ export class SessionComponent {
     });
   }
 
+  deleteSession(id: number) {
+    this.sessionService.deleteSession(id).subscribe({
+      next: () => this.loadSessions(),
+      error: (err) => console.error('Error deleting session:', err)
+    });
+  }
+
   trackById(index: number, session: Session) {
     return session.id;
   }
