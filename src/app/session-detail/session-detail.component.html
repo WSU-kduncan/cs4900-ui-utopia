@@ -1,6 +1,8 @@
 <div class="session-detail">
-    <h3>{{ session.name }}</h3>
-    <p>ID: {{ session.id}}</p>
-    <p>Date: {{ session.date }}</p>
-    <p>Duration: {{ session.duration }} mins</p>
-  </div>
+  <p><strong>Note:</strong> {{ session.note }}</p>
+  <p><strong>Date:</strong> {{ session.date }}</p>
+  <p><strong>Duration:</strong> {{ session.duration }}</p>
+  <p *ngIf="session.client"><strong>Client:</strong> {{ session.client.name }}</p>
+  <p *ngIf="session.trainer"><strong>Trainer:</strong> {{ session.trainer.name }}</p>
+  <p *ngIf="session.routine"><strong>Routine:</strong> {{ session.routine.name }}</p>
+</div>

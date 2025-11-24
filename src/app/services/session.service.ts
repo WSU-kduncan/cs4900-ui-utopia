@@ -3,10 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Session {
-  id: number; 
-  name: string; 
-  date: string; 
-  duration: number;
+  id: number;
+  date: string;
+  note: string;
+  duration: string;
+  client?: { id: number; name: string };
+  trainer?: { id: number; name: string };
+  routine?: { id: number; name: string };
 }
 
 @Injectable({
@@ -14,25 +17,16 @@ export interface Session {
 })
 export class SessionService {
 
-  sessions: Session[] = [
-    { id: 1, name: 'Leg Day', date: '2025-11-10', duration: 60 },
-    { id: 2, name: 'Push Day', date: '2025-11-08', duration: 45 },
-    { id: 3, name: 'Pull Day', date: '2025-11-05', duration: 50 }
-  ];
-
+  private apiUrl = 'http://localhost:8080/OpenTrainer/session'; 
+  
   constructor(private http: HttpClient) {}
 
-  addSession(name: string, date: string = new Date().toISOString().slice(0, 10), duration: number = 60) {
-    let newId = 1;
-    if (this.sessions.length > 0) {
-      newId = this.sessions[this.sessions.length - 1].id + 1;
-    }
-    this.sessions.push({ id: newId, name, date, duration });
-  }
+  createSession(data: any): Observable<any> {
+    return this.http.post(this.apiUrl, data);
+  }  
 
   getSessions(): Observable<Session[]> {
-    //return this.http.get<Session[]>('https://localhost:8080/OpenTrainer/session')
-    return this.http.get<Session[]>('https://jsonplaceholder.typicode.com/users');
+    return this.http.get<Session[]>(this.apiUrl);
   }
   
 }
