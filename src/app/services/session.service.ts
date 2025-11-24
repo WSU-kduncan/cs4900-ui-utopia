@@ -25,6 +25,10 @@ export class SessionService {
     return this.http.post(this.apiUrl, data);
   }  
 
+  deleteSession(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
   getSessions(): Observable<Session[]> {
     return this.http.get<Session[]>(this.apiUrl);
   }

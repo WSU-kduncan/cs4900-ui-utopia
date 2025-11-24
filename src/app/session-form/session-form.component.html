@@ -1,0 +1,22 @@
+<form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="note">Session Note:</label>
+      <input id="note" formControlName="note" placeholder="Enter session note" />
+      <div *ngIf="sessionForm.get('note')?.invalid && sessionForm.get('note')?.touched" style="color:red">
+        Note is required
+      </div>
+    </div>
+  
+    <div>
+      <label for="date">Date:</label>
+      <input type="date" id="date" formControlName="date" />
+    </div>
+  
+    <div>
+      <label for="duration">Duration:</label>
+      <input type="text" id="duration" formControlName="duration" />
+    </div>
+  
+    <button type="submit" [disabled]="sessionForm.invalid">Add Session</button>
+  </form>
+  
