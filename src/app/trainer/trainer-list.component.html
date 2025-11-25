@@ -2,23 +2,34 @@
   <input
     type="text"
     placeholder="Enter trainer name"
-    [(ngModel)]="newNameValue"
+    [(ngModel)]="newName"
     (ngModelChange)="newName.set($event)"
   />
-  <button (click)="addTrainer()">Add Item</button>
+  <input
+    type="text"
+    placeholder="Enter email"
+    [(ngModel)]="newEmail"
+    (ngModelChange)="newEmail.set($event)"
+  />
+  <input
+    type="password"
+    placeholder="Enter password"
+    [(ngModel)]="newPassword"
+    (ngModelChange)="newPassword.set($event)"
+    />
+  <button (click)="addTrainer()">Add Trainer</button>
 </div>
 
 <h2>Trainers from API</h2>
-<ul>
-  @for (trainer of trainers(); track trainer.id) {
-    <li class="list-item">
-      <app-trainer-detail [trainer]="trainer"></app-trainer-detail>
-    </li>
-  } @empty {
-    <p>No trainers to display.</p>
-  }
-</ul>
 
 @if (trainers().length > 0) {
-  <p>Data is available!</p>
+ <ul>
+    @for (trainer of trainers(); track trainer.id) {
+      <li>
+        <app-trainer-detail [trainer]="trainer"></app-trainer-detail>
+      </li>
+    }
+  </ul>
+} @else {
+  <p>No trainers to display.</p>
 }
