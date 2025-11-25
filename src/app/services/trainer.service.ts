@@ -6,33 +6,33 @@ export interface Trainer {
   id: number;
   name: string;
   email: string;
+  passwordHash: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class TrainerService {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/users';
+  private apiUrl = 'http://localhost:8080/OpenTrainer/trainer';
 
   constructor(private http: HttpClient) {}
 
-  getTrainers(): Observable<Trainer[]> {
-    return this.http.get<Trainer[]>(this.apiUrl);
+  private _trainers = signal<Trainer[]>([]);
+  trainers = this._trainers.asReadonly();
+
+  // Read
+  fetchTrainers(): void {
+    this.http.get<Trainer[]>(this.apiUrl).subscribe({
+      next: (data) => this._trainers.set(data),
+      error: (err) => console.error('Failed to fetch trainers', err)
+    });
   }
 
-  private _localTrainers = signal<Trainer[]>([]);
-  localTrainers = this._localTrainers.asReadonly();
+  // Create
+  createTrainer(trainer: Omit<Trainer, 'id'>): Observable<Trainer> {
+    return this.http.post<Trainer>(this.apiUrl, trainer);
+  }
 
-  addTrainer(name: string, email: string = '') {
-    if (!name.trim()) return;
-
-    const currentLocalIds = this._localTrainers().map(t => t.id);
-    const maxLocalId = currentLocalIds.length > 0 ? Math.max(...currentLocalIds) : 0;
-    const newId = maxLocalId + 1;
-
-    const newTrainer: Trainer = {
-      id: newId,
-      name: name.trim(),
-      email: email || `${name.toLowerCase().replace(' ', '.')}@example.com`
-    };
-    this._localTrainers.update(list => [...list, newTrainer]);
+  // Update 
+  updateTrainer(trainer: Trainer): Observable<Trainer> {
+    return this.http.put<Trainer>(`${this.apiUrl}/${trainer.id}`, trainer);
   }
 }
