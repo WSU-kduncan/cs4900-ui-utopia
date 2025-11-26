@@ -27,6 +27,7 @@
     @for (trainer of trainers(); track trainer.id) {
       <li>
         <app-trainer-detail [trainer]="trainer"></app-trainer-detail>
+        <button (click)="deleteTrainer(trainer.id)">Delete</button>
       </li>
     }
   </ul>
