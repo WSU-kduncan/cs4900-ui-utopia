@@ -1,5 +1,7 @@
+<!-- this is what displays from Session Entity -->
 <div class="session-detail">
   <p><strong>Note:</strong> {{ session.note }}</p>
+  <p><strong>Session Id:</strong> {{ session.id }}</p>
   <p><strong>Date:</strong> {{ session.date }}</p>
   <p><strong>Duration:</strong> {{ session.duration }}</p>
   <p *ngIf="session.client"><strong>Client:</strong> {{ session.client.name }}</p>
