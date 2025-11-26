@@ -1,3 +1,4 @@
+
 <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
     <div>
       <label for="note">Session Note:</label>
@@ -19,4 +20,3 @@
   
     <button type="submit" [disabled]="sessionForm.invalid">Add Session</button>
   </form>
-  
