@@ -46,4 +46,11 @@ export class TrainerListComponent implements OnInit {
   trackByTrainerId(index: number, trainer: Trainer): number {
     return trainer.id;
   }
+
+  deleteTrainer(id: number) {
+    this.trainerService.deleteTrainer(id).subscribe({
+      next: () => this.trainerService.fetchTrainers(),
+      error: err => console.error('Failed to delete trainer', err)
+    });
+  }
 }
