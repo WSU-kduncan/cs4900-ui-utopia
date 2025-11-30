@@ -1,22 +1,48 @@
-
 <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="note">Session Note:</label>
-      <input id="note" formControlName="note" placeholder="Enter session note" />
-      <div *ngIf="sessionForm.get('note')?.invalid && sessionForm.get('note')?.touched" style="color:red">
-        Note is required
-      </div>
-    </div>
-  
-    <div>
-      <label for="date">Date:</label>
-      <input type="date" id="date" formControlName="date" />
-    </div>
-  
-    <div>
-      <label for="duration">Duration:</label>
-      <input type="text" id="duration" formControlName="duration" />
-    </div>
-  
-    <button type="submit" [disabled]="sessionForm.invalid">Add Session</button>
-  </form>
+  <!-- session input -->
+  <div>
+    <label for="note">Session Note:</label>
+    <input id="note" formControlName="note" placeholder="Enter session note" />
+  </div>
+
+  <!-- date input -->
+  <div>
+    <label for="date">Date:</label>
+    <input type="date" id="date" formControlName="date" />
+  </div>
+
+  <!-- duration input -->
+  <div>
+    <label for="duration">Duration:</label>
+    <input id="duration" formControlName="duration" placeholder="HH:MM:SS" />
+  </div>
+
+<!-- client dropdown -->
+<div>
+  <label for="client">Client:</label>
+  <select id="client" formControlName="client">
+    <option [ngValue]="null">Select Client</option>
+    <option *ngFor="let c of clients" [ngValue]="c">{{ c.name }}</option>
+  </select>
+</div>
+
+<!-- trainer dropdown -->
+<div>
+  <label for="trainer">Trainer:</label>
+  <select id="trainer" formControlName="trainer">
+    <option [ngValue]="null">Select Trainer</option>
+    <option *ngFor="let t of trainers" [ngValue]="t">{{ t.name }}</option>
+  </select>
+</div>
+
+<!-- routine dropfown -->
+<div>
+  <label for="routine">Routine:</label>
+  <select id="routine" formControlName="routine">
+    <option [ngValue]="null">Select Routine</option>
+    <option *ngFor="let r of routines" [ngValue]="r">{{ r.name }}</option>
+  </select>
+</div>
+
+  <button type="submit" [disabled]="sessionForm.invalid">Add Session</button>
+</form>
