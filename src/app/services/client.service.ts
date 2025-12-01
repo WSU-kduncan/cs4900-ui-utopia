@@ -13,7 +13,7 @@ export interface Client {
   providedIn: 'root',
 })
 export class ClientService {
-  private readonly apiUrl = 'http://localhost:8080/client';
+  private readonly apiUrl = 'http://localhost:8080/OpenTrainer/client';
 
   constructor(private http: HttpClient) { }
 
