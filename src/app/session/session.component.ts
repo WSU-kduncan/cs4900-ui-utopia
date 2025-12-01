@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Session, SessionService } from '../services/session.service';
 import { SessionDetailComponent } from '../session-detail/session-detail.component';
+import { SessionFormComponent } from "../session-form/session-form.component";
 
 @Component({
   selector: 'app-session',
   standalone: true,
-  imports: [FormsModule, CommonModule, NgFor, NgIf, SessionDetailComponent],
+  imports: [FormsModule, CommonModule, NgFor, NgIf, SessionDetailComponent, SessionFormComponent],
   templateUrl: './session.component.html',
   styleUrls: ['./session.component.scss']
 })

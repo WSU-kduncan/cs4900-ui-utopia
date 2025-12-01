@@ -12,3 +12,8 @@ Backend URL:
 - session/ → list and dashboard
 - session-detail/ → one session card
 - session-form/ → form for creating sessions
+
+## **Create New Session**
+- After creating new sessions, RELOAD the page to see it listed under the sessions
+
+## **Delete Session**
