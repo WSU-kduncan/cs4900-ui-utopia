@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Trainer } from './trainer.service';
 
 export interface Client {
-  id: number;
+  id?: number;
   name: string;
   email: string;
-  trainer_id: number;
+  passwordHash: string;
+  trainer: Trainer;
 }
 
 @Injectable({

@@ -1,21 +1,16 @@
 <p>Clients</p>
 
 <form [formGroup]="clientForm" (ngSubmit)="addClient()">
-  <input
-    type="text"
-    formControlName="name"
-    placeholder="Client Name"
-  />
-  <input
-    type="email"
-    formControlName="email"
-    placeholder="Client Email"
-  />
-  <input
-    type="number"
-    formControlName="trainer_id"
-    placeholder="Trainer ID"
-  />
+  <input type="text" formControlName="name" placeholder="Client Name" />
+  <input type="email" formControlName="email" placeholder="Client Email" />
+  <input type="password" formControlName="passwordHash" placeholder="Password" />
+
+  <select formControlName="trainer_id">
+    <option *ngFor="let t of trainers(); trackBy: trackByTrainerId" [value]="t.id">
+      {{ t.name }}
+    </option>
+  </select>
+
   <button type="submit" [disabled]="clientForm.invalid">Add Client</button>
 </form>
 
@@ -25,7 +20,7 @@
       @for (client of clients(); track client.id) {
         <li>
           <app-client-detail [client]="client"></app-client-detail>
-          <button (click)="deleteClient(client.id)">Delete</button>
+          <button (click)="deleteClient(client.id!)">Delete</button>
         </li>
       }
     </ul>
