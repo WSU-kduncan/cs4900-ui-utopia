@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-session-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './session-form.component.html',
   styleUrls: ['./session-form.component.scss']
 })
