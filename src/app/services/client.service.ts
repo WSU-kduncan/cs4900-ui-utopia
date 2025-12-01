@@ -6,26 +6,38 @@ export interface Client {
   id: number;
   name: string;
   email: string;
+  trainer_id: number;
 }
+
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class ClientService {
-    private readonly apiUrl = 'https://jsonplaceholder.typicode.com/users';
+  private readonly apiUrl = 'http://localhost:8080/client';
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-    getClients(): Observable<Client[]> {
-      return this.http.get<Client[]>(this.apiUrl);
-    }
+  getClients(): Observable<Client[]> {
+    return this.http.get<Client[]>(this.apiUrl);
+  }
 
-    // clients = [
-    //     { id: 1, name: 'James Rowe' },
-    //     { id: 2, name: 'John Bench' },
-    //     { id: 3, name: 'Jack Squat' },
-    // ];
+  getClientById(id: number): Observable<Client> {
+    return this.http.get<Client>(`${this.apiUrl}/${id}`);
+  }
 
-    // addClient(name: string) {
-    //     this.clients.push({ id: (this.clients.at(this.clients.length - 1)?.id ?? 0) + 1, name: name });
-    // }
+  getClientByEmail(email: string): Observable<Client> {
+    return this.http.get<Client>(`${this.apiUrl}/email/${email}`);
+  }
+
+  createClient(client: Partial<Client>): Observable<Client> {
+    return this.http.post<Client>(this.apiUrl, client);
+  }
+
+  updateClient(id: number, client: Partial<Client>): Observable<Client> {
+    return this.http.put<Client>(`${this.apiUrl}/${id}`, client);
+  }
+
+  deleteClient(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

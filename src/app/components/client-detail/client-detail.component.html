@@ -1,7 +1,8 @@
-@if (client()) {
+@if (client) {
   <div class="client-detail">
-    <h3>{{ client().name }}</h3>
-    <p><strong>ID:</strong> {{ client().id }}</p>
-    <p><strong>Email:</strong> {{ client().email }}</p>
+    <h3>{{ client.name }}</h3>
+    <p><strong>ID:</strong> {{ client.id }}</p>
+    <p><strong>Email:</strong> {{ client.email }}</p>
+    <p><strong>Trainer ID:</strong> {{ client.trainer_id }}</p>
   </div>
 }

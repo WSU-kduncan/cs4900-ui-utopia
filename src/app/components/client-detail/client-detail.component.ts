@@ -1,18 +1,12 @@
-import { Component, input } from '@angular/core';
-
-export interface Client {
-    id: number;
-    name: string;
-    email: string;
-}
+import { Component, Input } from '@angular/core';
+import { Client } from '../../services/client.service';
 
 @Component({
   selector: 'app-client-detail',
-  imports: [],
   standalone: true,
   templateUrl: './client-detail.component.html',
-  styleUrl: './client-detail.component.scss'
+  styleUrls: ['./client-detail.component.scss'],
 })
 export class ClientDetailComponent {
-    client = input.required<Client>()
+  @Input() client!: Client;
 }
