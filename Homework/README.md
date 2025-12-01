@@ -17,3 +17,5 @@ Backend URL:
 - After creating new sessions, RELOAD the page to see it listed under the sessions
 
 ## **Delete Session**
+- Had to add DELETE to the API repo Session controller and service
+- Delete works instantly -- it removes sessions from frontend from the sessions list being displayed an also confirmed that it removes from the backend data as well. 
