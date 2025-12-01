@@ -1,24 +1,36 @@
 <p>Clients</p>
 
-<input
-  type="text"
-  [(ngModel)]="newClientName"
-  placeholder="New Client Name"
-  (keyup.enter)="addClient()"
-/>
-<button click="addClient()">Add Client</button>
+<form [formGroup]="clientForm" (ngSubmit)="addClient()">
+  <input
+    type="text"
+    formControlName="name"
+    placeholder="Client Name"
+  />
+  <input
+    type="email"
+    formControlName="email"
+    placeholder="Client Email"
+  />
+  <input
+    type="number"
+    formControlName="trainer_id"
+    placeholder="Trainer ID"
+  />
+  <button type="submit" [disabled]="clientForm.invalid">Add Client</button>
+</form>
 
-@if (clients(); as clientList) {
-  @if (clientList.length > 0) {
-  <ul>
-    @for (client of clients(); track client.id) {
-    <li>
-      <app-client-detail [client]="client" />
-    </li>
-    }
-  </ul>
+@if (clients()) {
+  @if (clients().length > 0) {
+    <ul>
+      @for (client of clients(); track client.id) {
+        <li>
+          <app-client-detail [client]="client"></app-client-detail>
+          <button (click)="deleteClient(client.id)">Delete</button>
+        </li>
+      }
+    </ul>
   } @else {
-  <p>No valid clients!</p>
+    <p>No valid clients!</p>
   }
 } @else {
   <p>Loading clients...</p>

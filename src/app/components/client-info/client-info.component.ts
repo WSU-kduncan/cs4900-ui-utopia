@@ -1,32 +1,48 @@
-import { Component, inject, Input } from '@angular/core';
-import { ClientService } from '../../services/client.service';
-import { FormsModule } from '@angular/forms';
-import { ClientDetailComponent } from '../client-detail/client-detail.component';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Client, ClientService } from '../../services/client.service';
+import { ClientDetailComponent } from '../client-detail/client-detail.component';
 
-export class Client {
-  name: String = 'Client Name';
-  id: Number = 0;
-}
 @Component({
   selector: 'app-client-info',
   standalone: true,
-  imports: [FormsModule, ClientDetailComponent],
+  imports: [ReactiveFormsModule, ClientDetailComponent],
   templateUrl: './client-info.component.html',
-  styleUrl: './client-info.component.scss',
+  styleUrls: ['./client-info.component.scss'],
 })
 export class ClientInfoComponent {
-  @Input() client: Client | null = null;
-
   private clientService = inject(ClientService);
+  private fb = inject(FormBuilder);
+
   clients = toSignal(this.clientService.getClients(), { initialValue: [] });
 
-  newClientName = '';
+  clientForm: FormGroup = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    trainer_id: [1, Validators.required]
+  });
+
+  refreshClients() {
+    this.clients = toSignal(this.clientService.getClients(), { initialValue: [] });
+  }
 
   addClient() {
-    if (this.newClientName.trim()) {
-      // this.clientService.addClient(this.newClientName.trim());
-      this.newClientName = '';
+    if (this.clientForm.valid) {
+      this.clientService.createClient(this.clientForm.value).subscribe({
+        next: () => {
+          this.refreshClients();
+          this.clientForm.reset();
+        },
+        error: (err) => console.error('Error creating client:', err),
+      });
     }
+  }
+
+  deleteClient(id: number) {
+    this.clientService.deleteClient(id).subscribe({
+      next: () => this.refreshClients(),
+      error: (err) => console.error('Error deleting client:', err),
+    });
   }
 }

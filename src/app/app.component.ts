@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TrainerListComponent } from './trainer/trainer-list.component';
 
-import { Client, ClientInfoComponent } from './components/client-info/client-info.component';
+import { ClientInfoComponent } from './components/client-info/client-info.component';
 
 @Component({
   selector: 'app-root',
@@ -12,5 +12,4 @@ import { Client, ClientInfoComponent } from './components/client-info/client-inf
 })
 export class AppComponent {
   title = 'fitness-tracker';
-  client = new Client();
 }
