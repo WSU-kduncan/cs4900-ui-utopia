@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Output, EventEmitter } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { SessionService } from '../services/session.service';
+import { SessionService, Session } from '../services/session.service';
 
 @Component({
   selector: 'app-session-form',
@@ -13,6 +13,8 @@ import { SessionService } from '../services/session.service';
 export class SessionFormComponent {
   private sessionService = inject(SessionService);
   private fb = inject(FormBuilder);
+
+  @Output() sessionCreated = new EventEmitter<Session>();
 
   // temporary data for dropdowns
   clients = [
@@ -26,7 +28,10 @@ export class SessionFormComponent {
   routines = [
     { id: 1, name: 'Full Body Strength' },
     { id: 2, name: 'Cardio Endurance' },
-    { id: 3, name: 'Core Builder' }
+    { id: 3, name: 'Core Builder' },
+    { id: 4, name: 'Push' },
+    { id: 5, name: 'Pull' },
+    { id: 6, name: 'Leg' }
   ];
 
   sessionForm: FormGroup = this.fb.group({
@@ -43,7 +48,7 @@ export class SessionFormComponent {
       const sessionData = this.sessionForm.value;
 
       this.sessionService.createSession(sessionData).subscribe({
-        next: res => {
+        next: (res: Session) => {
           console.log('Session created:', res);
           this.sessionForm.reset({
             note: '',
@@ -53,6 +58,8 @@ export class SessionFormComponent {
             trainer: null,
             routine: null
           });
+
+          this.sessionCreated.emit(res);
         },
         error: err => console.error('Error creating session:', err)
       });
