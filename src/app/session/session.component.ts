@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Session, SessionService } from '../services/session.service';
 import { SessionDetailComponent } from '../session-detail/session-detail.component';
-import { SessionFormComponent } from "../session-form/session-form.component";
+import { SessionFormComponent } from '../session-form/session-form.component';
 
 @Component({
   selector: 'app-session',
@@ -45,6 +45,8 @@ export class SessionComponent {
       },
       error: (err) => console.error('Failed to create session', err)
     });
+
+    this.loadSessions()
   }
 
   deleteSession(id: number) {

@@ -1,6 +1,6 @@
-<p>Clients</p>
+<h2>Clients</h2>
 
-<form [formGroup]="clientForm" (ngSubmit)="addClient()">
+<form [formGroup]="clientForm" (ngSubmit)="addClient()" class="add-section">
   <input type="text" formControlName="name" placeholder="Client Name" />
   <input type="email" formControlName="email" placeholder="Client Email" />
   <input type="password" formControlName="passwordHash" placeholder="Password" />
