@@ -1,4 +1,7 @@
-# FitnessTracker
+# Utopia Fitness Tracker
+## CS4900: Application of the Software Development Lifecycle
+## Information:
+This is the UI repository for the Fitness Tracker.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
 
