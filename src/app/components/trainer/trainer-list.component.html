@@ -1,0 +1,48 @@
+<h2 class="page-title">Trainers</h2>
+
+<div class="card add-card">
+  <h3>Add New Trainer</h3>
+
+  <div class="add-section">
+    <input
+      type="text"
+      placeholder="Enter trainer name"
+      [(ngModel)]="newName"
+      (ngModelChange)="newName.set($event)"
+    />
+    <input
+      type="text"
+      placeholder="Enter email"
+      [(ngModel)]="newEmail"
+      (ngModelChange)="newEmail.set($event)"
+    />
+    <input
+      type="password"
+      placeholder="Enter password"
+      [(ngModel)]="newPassword"
+      (ngModelChange)="newPassword.set($event)"
+    />
+
+    <button class="primary-btn" (click)="addTrainer()">Add Trainer</button>
+  </div>
+</div>
+
+<div class="trainer-list">
+  @if (trainers().length > 0) {
+  <ul>
+      @for (trainer of trainers(); track trainer.id) {
+        <li class="trainer-card">
+          <app-trainer-detail [trainer]="trainer"></app-trainer-detail>
+
+          <div class="actions">
+            <button class="delete-btn" (click)="deleteTrainer(trainer.id)">Delete</button>
+          </div>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="empty">No trainers to display.</p>
+  }
+</div>
+
+  

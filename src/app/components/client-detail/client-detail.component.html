@@ -1,8 +1,10 @@
 @if (client) {
-  <div class="client-detail">
-    <h3>{{ client.name }}</h3>
-    <p><strong>ID:</strong> {{ client.id }}</p>
-    <p><strong>Email:</strong> {{ client.email }}</p>
-    <p><strong>Trainer:</strong> {{ client.trainer.name }}</p>
+  <div class="app-client-detail">
+    <div class="info">
+      <h3>{{ client.name }}</h3>
+      <p><strong>Email:</strong> {{ client.email }}</p>
+      <p><strong>Trainer:</strong> {{ client.trainer.name }}</p>
+      <small class="id-label">ID: {{ client.id }}</small>
+    </div>
   </div>
 }

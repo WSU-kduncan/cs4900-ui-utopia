@@ -1,0 +1,18 @@
+.session-detail-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--primary-dark);
+  box-shadow: 0 1px 6px rgba(60, 60, 73, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.detail-line {
+  margin: 0;
+  font-family: 'Noto Serif', serif;
+}

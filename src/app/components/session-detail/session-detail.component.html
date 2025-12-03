@@ -1,0 +1,19 @@
+<!-- this is what displays from Session Entity -->
+<div class="session-detail-card">
+  <p class="detail-line"><strong>Note:</strong> {{ session.note }}</p>
+  <p class="detail-line"><strong>Session Id:</strong> {{ session.id }}</p>
+  <p class="detail-line"><strong>Date:</strong> {{ session.date }}</p>
+  <p class="detail-line"><strong>Duration:</strong> {{ session.duration }}</p>
+  
+  <p class="detail-line" *ngIf="session.client">
+    <strong>Client:</strong> {{ session.client.name }}
+  </p>
+  
+  <p class="detail-line" *ngIf="session.trainer">
+    <strong>Trainer:</strong> {{ session.trainer.name }}
+  </p>
+
+  <p class="detail-line" *ngIf="session.routine">
+    <strong>Routine:</strong> {{ session.routine.name }}
+  </p>
+</div>

@@ -1,0 +1,16 @@
+<h2 class="page-title">Sessions</h2>
+
+<app-session-form></app-session-form>
+
+<!-- sessions list -->
+<div class="sessions-container">
+  <ul class="session-list">
+    <li *ngFor="let session of sessions; trackBy: trackById">
+        <app-session-detail [session]="session"></app-session-detail>
+        <button class="delete-btn" (click)="deleteSession(session.id)">Delete</button>
+    </li>
+  </ul>
+  <p *ngIf="sessions.length === 0" class="empty">No sessions available!</p>
+</div>
+
+

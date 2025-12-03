@@ -1,0 +1,48 @@
+<form [formGroup]="sessionForm" (ngSubmit)="onSubmit()" class="session-form-card">
+  <!-- session input -->
+  <div class="form-group">
+    <label for="note">Session Note:</label>
+    <input id="note" formControlName="note" placeholder="Enter session note"/>
+  </div>
+
+  <!-- date input -->
+  <div class="form-group">
+    <label for="date">Date:</label>
+    <input type="date" id="date" formControlName="date"/>
+  </div>
+
+  <!-- duration input -->
+  <div class="form-group">
+    <label for="duration">Duration:</label>
+    <input id="duration" formControlName="duration" placeholder="HH:MM:SS"/>
+  </div>
+
+  <!-- client dropdown -->
+  <div class="form-group">
+    <label for="client">Client:</label>
+    <select id="client" formControlName="client">
+      <option [ngValue]="null">Select Client</option>
+      <option *ngFor="let c of clients" [ngValue]="c">{{ c.name }}</option>
+    </select>
+  </div>
+
+  <!-- trainer dropdown -->
+  <div class="form-group">
+    <label for="trainer">Trainer:</label>
+    <select id="trainer" formControlName="trainer">
+      <option [ngValue]="null">Select Trainer</option>
+      <option *ngFor="let t of trainers" [ngValue]="t">{{ t.name }}</option>
+    </select>
+  </div>
+
+  <!-- routine dropfown -->
+  <div class="form-group">
+    <label for="routine">Routine:</label>
+    <select id="routine" formControlName="routine">
+      <option [ngValue]="null">Select Routine</option>
+      <option *ngFor="let r of routines" [ngValue]="r">{{ r.name }}</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn-primary" [disabled]="sessionForm.invalid">Add Session</button>
+</form>

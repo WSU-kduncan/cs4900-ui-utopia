@@ -1,32 +1,55 @@
-<h2>Clients</h2>
+<h2 class="page-title">Clients</h2>
 
-<form [formGroup]="clientForm" (ngSubmit)="addClient()" class="add-section">
-  <input type="text" formControlName="name" placeholder="Client Name" />
-  <input type="email" formControlName="email" placeholder="Client Email" />
-  <input type="password" formControlName="passwordHash" placeholder="Password" />
+<div class="card add-card">
+  <h3>Add New Client</h3>
 
-  <select formControlName="trainer_id">
-    <option *ngFor="let t of trainers(); trackBy: trackByTrainerId" [value]="t.id">
-      {{ t.name }}
-    </option>
-  </select>
+  <form [formGroup]="clientForm" (ngSubmit)="addClient()" class="add-section">
+    <input 
+      type="text"
+      formControlName="name"
+      placeholder="Client Name"
+    />
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="Client Email"
+    />
+    <input
+      type="password"
+      formControlName="passwordHash"
+      placeholder="Password"
+    />
 
-  <button type="submit" [disabled]="clientForm.invalid">Add Client</button>
-</form>
+    <select formControlName="trainer_id">
+      <option 
+        *ngFor="let t of trainers(); trackBy: trackByTrainerId" 
+        [value]="t.id">
+        {{ t.name }}
+      </option>
+    </select>
 
-@if (clients()) {
-  @if (clients().length > 0) {
-    <ul>
-      @for (client of clients(); track client.id) {
-        <li>
-          <app-client-detail [client]="client"></app-client-detail>
-          <button (click)="deleteClient(client.id!)">Delete</button>
-        </li>
-      }
-    </ul>
+    <button type="submit" class="primary-btn" [disabled]="clientForm.invalid">Add Client</button>
+  </form>
+</div>
+
+<div class="client-list">
+  @if (clients()) {
+    @if (clients().length > 0) {
+      <ul>
+        @for (client of clients(); track client.id) {
+          <li class="client-card">
+            <app-client-detail [client]="client"></app-client-detail>
+
+            <div class="actions">
+              <button class="delete-btn" (click)="deleteClient(client.id!)">Delete</button>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="empty">No valid clients!</p>
+    }
   } @else {
-    <p>No valid clients!</p>
+    <p class="empty">Loading clients...</p>
   }
-} @else {
-  <p>Loading clients...</p>
-}
+</div>

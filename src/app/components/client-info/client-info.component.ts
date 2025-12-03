@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Client, ClientService } from '../../services/client.service';
+import { Client, ClientService } from '../services/client.service';
 import { ClientDetailComponent } from '../client-detail/client-detail.component';
-import { TrainerService, Trainer } from '../../services/trainer.service';
-import { NgFor } from '@angular/common';
+import { TrainerService, Trainer } from '../services/trainer.service';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-client-info',
   standalone: true,
-  imports: [ReactiveFormsModule, ClientDetailComponent, NgFor],
+  imports: [ReactiveFormsModule, ClientDetailComponent, NgFor, CommonModule],
   templateUrl: './client-info.component.html',
   styleUrls: ['./client-info.component.scss'],
 })
