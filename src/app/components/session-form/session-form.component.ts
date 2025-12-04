@@ -1,7 +1,9 @@
-import { Component, inject, Output, EventEmitter } from '@angular/core';
+import {Component, inject, Output, EventEmitter, signal} from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SessionService, Session } from '../services/session.service';
+import {TrainerService} from '../services/trainer.service';
+import {Client, ClientService} from '../services/client.service';
 
 @Component({
   selector: 'app-session-form',
@@ -16,15 +18,17 @@ export class SessionFormComponent {
 
   @Output() sessionCreated = new EventEmitter<Session>();
 
-  // temporary data for dropdowns
-  clients = [
-    { id: 1, name: 'John Jones' },
-    { id: 3, name: 'Kelly Walters' }
-  ];
-  trainers = [
-    { id: 1, name: 'Arnold Coleman' },
-    { id: 2, name: 'Charles Odderson' }
-  ];
+  constructor() {
+    this.trainerService.fetchTrainers();
+    this.clientService.fetchClients();
+  }
+
+  private trainerService = inject(TrainerService);
+  trainers = this.trainerService.trainers;
+
+  private clientService = inject(ClientService);
+  clients = this.clientService.clients;
+
   routines = [
     { id: 1, name: 'Full Body Strength' },
     { id: 2, name: 'Cardio Endurance' },
@@ -38,7 +42,7 @@ export class SessionFormComponent {
     note: ['', Validators.required],
     date: [new Date().toISOString().slice(0, 10), Validators.required],
     duration: ['01:00:00', Validators.required],
-    client: [null, Validators.required], 
+    client: [null, Validators.required],
     trainer: [null, Validators.required],
     routine: [null, Validators.required]
   });

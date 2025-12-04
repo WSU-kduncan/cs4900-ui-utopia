@@ -22,7 +22,7 @@
     <label for="client">Client:</label>
     <select id="client" formControlName="client">
       <option [ngValue]="null">Select Client</option>
-      <option *ngFor="let c of clients" [ngValue]="c">{{ c.name }}</option>
+      <option *ngFor="let c of clients()" [ngValue]="c">{{ c.name }}</option>
     </select>
   </div>
 
@@ -31,7 +31,7 @@
     <label for="trainer">Trainer:</label>
     <select id="trainer" formControlName="trainer">
       <option [ngValue]="null">Select Trainer</option>
-      <option *ngFor="let t of trainers" [ngValue]="t">{{ t.name }}</option>
+      <option *ngFor="let t of trainers()" [ngValue]="t">{{ t.name }}</option>
     </select>
   </div>
 

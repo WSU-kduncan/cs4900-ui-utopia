@@ -17,7 +17,7 @@ export class ClientInfoComponent {
   private trainerService = inject(TrainerService);
   private fb = inject(FormBuilder);
 
-  clients = signal<Client[]>([]);
+  clients = this.clientService.clients;
   trainers = this.trainerService.trainers;
 
   clientForm: FormGroup = this.fb.group({
@@ -28,15 +28,8 @@ export class ClientInfoComponent {
   });
 
   constructor() {
-    this.fetchClients();
+    this.clientService.fetchClients();
     this.trainerService.fetchTrainers();
-  }
-
-  fetchClients() {
-    this.clientService.getClients().subscribe({
-      next: (data) => this.clients.set(data),
-      error: (err) => console.error('Error fetching clients', err),
-    });
   }
 
   trackByTrainerId(index: number, trainer: Trainer): number {
@@ -64,7 +57,7 @@ export class ClientInfoComponent {
 
       this.clientService.createClient(payload).subscribe({
         next: () => {
-          this.fetchClients();
+          this.clientService.fetchClients();
           this.clientForm.reset();
         },
         error: (err) => console.error('Error creating client:', err),
@@ -74,7 +67,7 @@ export class ClientInfoComponent {
 
   deleteClient(id: number) {
     this.clientService.deleteClient(id).subscribe({
-      next: () => this.fetchClients(),
+      next: () => this.clientService.fetchClients(),
       error: (err) => console.error('Error deleting client:', err),
     });
   }

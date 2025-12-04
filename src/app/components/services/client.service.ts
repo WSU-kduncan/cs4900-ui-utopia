@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Trainer } from './trainer.service';
 
@@ -18,6 +18,16 @@ export class ClientService {
   private readonly apiUrl = 'http://localhost:8080/OpenTrainer/client';
 
   constructor(private http: HttpClient) { }
+
+  private _clients = signal<Client[]>([]);
+  clients = this._clients.asReadonly();
+
+  fetchClients() {
+    this.getClients().subscribe({
+      next: (data) => this._clients.set(data),
+      error: (err) => console.error('Error fetching clients', err),
+    });
+  }
 
   getClients(): Observable<Client[]> {
     return this.http.get<Client[]>(this.apiUrl);
